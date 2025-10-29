@@ -1,0 +1,45 @@
+// server.js
+
+const express = require('express');
+const path = require('path');
+const app = express();
+const mongoose = require('mongoose');
+const cors = require('cors');
+
+const userRoutes = require('./routes/userRoutes');
+const companyRoutes = require('./routes/companyRoutes');
+const domesticRoutes = require('./routes/domesticRoutes')
+const notificationRoutes = require('./routes/notificationRoutes');
+
+app.use(cors());
+app.use(express.json()); // ✅ must be before routes
+
+mongoose.connect('mongodb+srv://tarfeadash:WNpkhwzogApA72A5@cluster0.pmbzwcn.mongodb.net/dashboarddb?retryWrites=true&w=majority&appName=Cluster0')
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error(err));
+
+
+// Enable CORS for local development (adjust origin as needed)
+app.use(cors({
+  origin: 'https://tarfea-dashboard.vercel.app'  // or '*' for all origins, but better be specific
+}));
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, 'frontend')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'register.html'));
+});
+
+
+// ROUTES
+app.use('/api/users', userRoutes);
+app.use('/api/company', companyRoutes);
+app.use('/api/domestic', domesticRoutes);
+app.use('/api', notificationRoutes);
+
+
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
