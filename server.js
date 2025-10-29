@@ -21,7 +21,7 @@ mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb
 
 // Enable CORS for local development (adjust origin as needed)
 app.use(cors({
-  origin: 'https://tarfea-dashboard.vercel.app'  // or '*' for all origins, but better be specific
+  origin: 'https://tarfeadashboard.vercel.app/'  // or '*' for all origins, but better be specific
 }));
 
 // Serve static files from the public folder
