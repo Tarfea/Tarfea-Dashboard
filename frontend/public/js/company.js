@@ -5,7 +5,7 @@ let editingId = null;
 
   const API_BASE = window.location.hostname === "localhost"
     ? "http://localhost:3001"
-    : "https://tarfea-dashboard.vercel.app/";
+    : "https://tarfeadashboard.vercel.app/";
 
 // --- Auth helpers ---
 function getToken() {
