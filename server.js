@@ -14,7 +14,7 @@ const notificationRoutes = require('./routes/notificationRoutes');
 app.use(cors());
 app.use(express.json()); // ✅ must be before routes
 
-mongoose.connect('mongodb+srv://tarfeadash:WNpkhwzogApA72A5@cluster0.pmbzwcn.mongodb.net/dashboarddb?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb.net/?appName=TarfeaDB')
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error(err));
 
