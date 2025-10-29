@@ -2,7 +2,7 @@
 
   const API_BASE = window.location.hostname === "localhost"
     ? "http://localhost:3001"
-    : "https://tarfea-dashboard.vercel.app/";
+    : "https://tarfeadashboard.vercel.app/";
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("login-form");
