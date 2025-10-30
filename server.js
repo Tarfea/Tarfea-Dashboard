@@ -18,7 +18,6 @@ mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.error(err));
 
-
 // Enable CORS for local development (adjust origin as needed)
 app.use(cors({
   origin: 'https://tarfeadashboard.vercel.app/'  // or '*' for all origins, but better be specific
