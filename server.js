@@ -12,7 +12,14 @@ const companyRoutes = require('./routes/companyRoutes');
 const domesticRoutes = require('./routes/domesticRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://tarfeadashboard.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+}));
+
+// app.use(cors());
 app.use(express.json()); // ✅ must be before routes
 
 mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb.net/?appName=TarfeaDB')
@@ -20,9 +27,9 @@ mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb
     .catch(err => console.error(err));
 
 
-app.use(cors({
-    origin: 'https://tarfeadashboard.vercel.app/' // or '*' for all origins, but better be specific 
-}));
+// app.use(cors({
+//     origin: 'https://tarfeadashboard.vercel.app/' // or '*' for all origins, but better be specific 
+// }));
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 
