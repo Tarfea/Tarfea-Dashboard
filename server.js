@@ -13,7 +13,7 @@ const app = express();
 
 // ✅ CORS — only once
 app.use(cors({
-  origin: 'https://tarfeadashboard.vercel.app',
+  origin: 'https://tarfeadashboard.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true,
 }));
