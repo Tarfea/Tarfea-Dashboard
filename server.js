@@ -11,7 +11,6 @@ const companyRoutes = require('./routes/companyRoutes');
 const domesticRoutes = require('./routes/domesticRoutes')
 const notificationRoutes = require('./routes/notificationRoutes');
 
-app.use(cors());
 app.use(express.json()); // ✅ must be before routes
 
 mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb.net/?appName=TarfeaDB')
@@ -20,7 +19,7 @@ mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb
 
 // Enable CORS for local development (adjust origin as needed)
 app.use(cors({
-  origin: 'https://tarfeadashboard.vercel.app/'  // or '*' for all origins, but better be specific
+  origin: 'https://tarfeadashboard.vercel.app',
 }));
 
 // Serve static files from the public folder
