@@ -1,43 +1,45 @@
 // server.js
-
 const express = require('express');
 const path = require('path');
-const app = express();
-const mongoose = require('mongoose');
 const cors = require('cors');
+const dbConnect = require('./db');
 
 const userRoutes = require('./routes/userRoutes');
 const companyRoutes = require('./routes/companyRoutes');
-const domesticRoutes = require('./routes/domesticRoutes')
+const domesticRoutes = require('./routes/domesticRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 
-app.use(express.json()); // ✅ must be before routes
+const app = express();
 
-mongoose.connect('mongodb+srv://Tarfea:IMHq1xc2LBqkhXRK@tarfeadb.7p6flo2.mongodb.net/?appName=TarfeaDB')
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error(err));
-
-// Enable CORS for local development (adjust origin as needed)
+// ✅ CORS — only once
 app.use(cors({
   origin: 'https://tarfeadashboard.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 
-// Serve static files from the public folder
+// ✅ Parse JSON before routes
+app.use(express.json());
+
+// ✅ Connect to MongoDB (once)
+dbConnect()
+  .then(() => console.log('✅ MongoDB connected successfully'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err));
+
+// ✅ Serve static files
 app.use(express.static(path.join(__dirname, 'frontend')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'register.html'));
 });
 
-
-// ROUTES
+// ✅ Routes
 app.use('/api/users', userRoutes);
 app.use('/api/company', companyRoutes);
 app.use('/api/domestic', domesticRoutes);
 app.use('/api', notificationRoutes);
 
-
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`🚀 Server running on port ${PORT}`);
 });
